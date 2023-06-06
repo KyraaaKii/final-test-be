@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-white">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mathematics Class</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="h-full">
+    <div class="min-h-full">
+      <nav class="bg-gray-800">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="flex h-16 items-center justify-between">
+            <div class="flex items-center">
+              <div class="flex-shrink-0">
+                <img
+                  class="h-8 w-8"
+                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                  alt="Your Company"
+                />
+              </div>
+              <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4">
+                  <a
+                    class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                    aria-current="page"
+                    >Matematika</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="hidden md:block">
+              <div class="ml-4 flex items-center md:ml-6">
+                <div class="relative ml-3">
+                  <div class="flex items-center">
+                    <div>
+                      <a href="/auth/logout">
+                        <button
+                          class="bg-red-900 text-white rounded-md px-3 py-2 text-sm font-medium ml-6"
+                        >
+                          <p class="text-md font-medium text-white">Log Out</p>
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <header class="bg-white shadow">
+        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+          <h1 class="text-3xl font-bold tracking-tight text-gray-900">
+            Siswa Management
+          </h1>
+        </div>
+      </header>
+      <main>
+        <div class="mx-auto max-w-[75%] py-6 sm:px-6 lg:px-8">
+          <!-- Your content -->
+
+          <div
+            class="relative overflow-x-auto shadow-md sm:rounded-lg px-2 py-5"
+          >
+            <div class="flex items-center justify-between pb-4">
+              <label for="table-search" class="sr-only">Search</label>
+              <div class="relative">
+                <div
+                  class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+                >
+                  <svg
+                    class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                    aria-hidden="true"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </div>
+                <input
+                  type="text"
+                  id="table-search"
+                  class="block p-2 pl-10 text-sm text-gray-600 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Search for items"
+                />
+              </div>
+              <div>
+                <button
+                  id="addDataButton"
+                  class="px-5 py-2 rounded-md bg-blue-700 hidden"
+                >
+                  <p class="text-sm text-white font-semibold">+ Add Data</p>
+                </button>
+              </div>
+            </div>
+            <table class="w-full text-sm text-left text-gray-500">
+              <thead class="text-xs font-bold text-gray-500 bg-gray-50">
+                <tr>
+                  <th scope="col" class="px-6 py-3">#</th>
+                  <th scope="col" class="px-6 py-3">Fullname</th>
+                  <th scope="col" class="px-6 py-3">Birth Place</th>
+                  <th scope="col" class="px-6 py-3">Birth of Date</th>
+                  <th scope="col" class="px-6 py-3">Category</th>
+                  <th scope="col" class="px-6 py-3">Address</th>
+                  <th scope="col" class="px-6 py-3">Phone Number</th>
+                  <th scope="col" class="px-6 py-3">Parent's Name</th>
+                  <th scope="col" class="px-6 py-3">Parent's Contact</th>
+                  <th scope="col" class="px-6 py-3">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% data.forEach((siswa, i) => { %>
+                <tr class="bg-white border-b">
+                  <td class="px-6 py-4"><%= i + 1 %></td>
+                  <td class="px-6 py-4"><%= siswa.fullname %></td>
+                  <td class="px-6 py-4"><%= siswa.birth_place %></td>
+                  <td class="px-6 py-4">
+                    <%= siswa.birth_date.toLocaleDateString('en-GB') %>
+                  </td>
+                  <td class="px-6 py-4"><%= siswa.class_category %></td>
+                  <td class="px-6 py-4"><%= siswa.address %></td>
+                  <td class="px-6 py-4"><%= siswa.phone %></td>
+                  <td class="px-6 py-4"><%= siswa.parents_name %></td>
+                  <td class="px-6 py-4"><%= siswa.parents_contact %></td>
+                  <td class="px-6 py-4">
+                    <% if (siswa.id === id) { %>
+                    <div class="flex flex-col">
+                      <a class="font-medium text-blue-600">
+                        <button
+                          id="updateButton"
+                          class="updateDataButton bg-blue-200 px-4 py-2 rounded-xl hover:underline"
+                        >
+                          Update
+                        </button>
+                      </a>
+                      <a class="font-medium text-red-600 mt-1">
+                        <button
+                          id="deleteButton"
+                          class="bg-red-200 px-4 py-2 rounded-xl hover:underline"
+                        >
+                          Delete
+                        </button>
+                      </a>
+                    </div>
+                    <% } %>
+                  </td>
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Update Modal -->
+
+    <div
+      id="updateModal"
+      class="relative z-10 hidden"
+      aria-labelledby="modal-title"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div
+        class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+      ></div>
+
+      <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div
+          class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+        >
+          <div
+            class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+          >
+            <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+              <div class="flex justify-center sm:flex sm:items-start">
+                <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                  <h3
+                    class="text-base font-semibold leading-6 text-gray-900 mb-5"
+                    id="modal-title"
+                  >
+                    Update account
+                  </h3>
+                  <div class="mt-2">
+                    <form
+                      class="space-y-6"
+                      action="/siswas/update/<%= id %>"
+                      method="POST"
+                    >
+                      <div>
+                        <label
+                          for="fullname"
+                          class="block text-sm font-medium leading-6 text-gray-900"
+                          >Fullname</label
+                        >
+                        <div class="mt-2">
+                          <input
+                            id="fullname"
+                            name="fullname"
+                            type="text"
+                            value="<%= update.fullname %>"
+                            required
+                            class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label
+                          for="class_category"
+                          class="block text-sm font-medium leading-6 text-gray-900"
+                          >Class Category</label
+                        >
+                        <div class="mt-2">
+                          <select
+                            name="class_category"
+                            id="class_category"
+                            class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-1.5 px-2"
+                          >
+                            <option value="" disabled>
+                              Class Category
+                            </option>
+                            <option value="Matematika" <%= update.class_category == 'Matematika' ? 'selected' : '' %>>Matematika</option>
+                            <option value="IPA" <%= update.class_category == 'IPA' ? 'selected' : '' %>>IPA</option>
+                            <option value="IPS" <%= update.class_category == 'IPS' ? 'selected' : '' %>>IPS</option>
+                            <option value="Bahasa" <%= update.class_category == 'Bahasa' ? 'selected' : '' %>>Bahasa</option>
+                            <option value="Bela Diri" <%= update.class_category == 'Bela Diri' ? 'selected' : '' %>>Bela Diri</option>
+                            <option value="Tari" <%= update.class_category == 'Tari' ? 'selected' : '' %>>Tari</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="flex justify-between">
+                        <div>
+                          <label
+                            for="birth_place"
+                            class="block text-sm font-medium leading-6 text-gray-900"
+                            >Birth Place</label
+                          >
+                          <div class="mt-2">
+                            <input
+                              id="birth_place"
+                              name="birth_place"
+                              type="text"
+                              value="<%= update.birth_place %>"
+                              required
+                              class="block w-[230px] mr-4 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <label
+                            for="birth_date"
+                            class="block text-sm font-medium leading-6 text-gray-900"
+                            >Birth Date</label
+                          >
+                          <div class="mt-2">
+                            <input
+                              id="birth_date"
+                              name="birth_date"
+                              type="date"
+                              value="<%= update.birth_date ? update.birth_date.toLocaleDateString('en-CA') : '' %>"
+                              required
+                              class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label for="address" class="block text-sm font-medium leading-6 text-gray-900">Address</label>
+                        <div class="mt-2">
+                          <textarea id="address" name="address" required class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"><%= update.address %></textarea>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label
+                          for="phone"
+                          class="block text-sm font-medium leading-6 text-gray-900"
+                          >Phone Number</label
+                        >
+                        <div class="mt-2">
+                          <input
+                            id="phone"
+                            name="phone"
+                            type="text"
+                            value="<%= update.phone %>"
+                            required
+                            class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label
+                          for="parents_name"
+                          class="block text-sm font-medium leading-6 text-gray-900"
+                          >Parents Name</label
+                        >
+                        <div class="mt-2">
+                          <input
+                            id="parents_name"
+                            name="parents_name"
+                            type="text"
+                            value="<%= update.parents_name %>"
+                            required
+                            class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label
+                          for="parents_contact"
+                          class="block text-sm font-medium leading-6 text-gray-900"
+                          >Parents Contact</label
+                        >
+                        <div class="mt-2">
+                          <input
+                            id="parents_contact"
+                            name="parents_contact"
+                            type="text"
+                            value="<%= update.parents_contact %>"
+                            required
+                            class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          />
+                        </div>
+                      </div>
+                      <div
+                        class="bg-white px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
+                      >
+                        <button
+                          type="submit"
+                          class="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
+                        >
+                          Update
+                        </button>
+                        <button
+                          id="closeUpdateModal"
+                          type="button"
+                          class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Modal -->
+
+    <div
+      id="deleteModal"
+      class="relative z-10 hidden"
+      aria-labelledby="modal-title"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div
+        class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+      ></div>
+
+      <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div
+          class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+        >
+          <div
+            class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+          >
+            <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+              <div class="sm:flex sm:items-start">
+                <div
+                  class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
+                >
+                  <svg
+                    class="h-6 w-6 text-red-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+                    />
+                  </svg>
+                </div>
+                <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                  <h3
+                    class="text-base font-semibold leading-6 text-gray-900"
+                    id="modal-title"
+                  >
+                    Deactivate account
+                  </h3>
+                  <div class="mt-2">
+                    <p class="text-sm text-gray-500">
+                      Are you sure you want to delete your account? All of your
+                      data will be permanently removed. This action cannot be
+                      undone.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
+            >
+              <a href="/siswas/delete/<%= id %>">
+                <button
+                  type="button"
+                  class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+                >
+                  Deactivate
+                </button>
+              </a>
+              <button
+                id="closeModal"
+                type="button"
+                class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Delete Modal
+      const deleteButton = document.getElementById("deleteButton");
+      const deleteModal = document.getElementById("deleteModal");
+      const closeModal = document.getElementById("closeModal");
+
+      deleteButton.addEventListener("click", () => {
+        deleteModal.classList.remove("hidden");
+      });
+
+      closeModal.addEventListener("click", () => {
+        deleteModal.classList.add("hidden");
+      });
+
+      //Update Modal
+      const updateButton = document.getElementById("updateButton");
+      const updateModal = document.getElementById("updateModal");
+      const closeUpdate = document.getElementById("closeUpdateModal");
+
+      updateButton.addEventListener("click", () => {
+        updateModal.classList.remove("hidden");
+      });
+
+      closeUpdate.addEventListener("click", () => {
+        updateModal.classList.add("hidden");
+      });
+    </script>
+  </body>
+</html>
