@@ -124,7 +124,7 @@ exports.login = async (req, res) => {
 
     if (role === "admin") {
       res.cookie("accessToken", token);
-      return res.redirect(`/siswas/all`);
+      return res.redirect(`/siswas/admin/all`);
     }
 
     const findClass = await siswas.findOne({
