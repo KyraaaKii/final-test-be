@@ -73,16 +73,16 @@
               <div class="bg-gray-50">
                 <select
                   name="class_category"
-                  id="class_category"
+                  id="category"
                   class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-1.5 px-2"
                 >
-                  <option value="" disabled selected>Class Category</option>
-                  <option value="Matematika">Matematika</option>
-                  <option value="IPA">IPA</option>
-                  <option value="IPS">IPS</option>
-                  <option value="Bahasa">Bahasa</option>
-                  <option value="Bela Diri">Bela Diri</option>
-                  <option value="Tari">Tari</option>
+                  <option value="all">All</option>
+                  <option value="matematika">Matematika</option>
+                  <option value="ipa">IPA</option>
+                  <option value="ips">IPS</option>
+                  <option value="bahasa">Bahasa</option>
+                  <option value="bela_diri">Bela Diri</option>
+                  <option value="tari">Tari</option>
                 </select>
               </div>
               <label for="table-search" class="sr-only">Search</label>
@@ -722,8 +722,47 @@
           document.getElementById("addDataModal").classList.add("hidden");
         });
 
-      // UPDATE
+      // DELETE
+      const deleteModal = document.getElementById("deleteModal");
+      const closeModal = document.querySelectorAll(".closeModal");
+      const deleteButton = document.querySelectorAll(".deleteButton");
+      const deleteData = document.querySelectorAll(".deactivate");
+      let id = 1;
 
+      deleteButton.forEach((button) => {
+        button.addEventListener("click", function (event) {
+          event.preventDefault();
+
+          deleteModal.classList.remove("hidden");
+        });
+      });
+
+      closeModal.forEach((button) => {
+        button.addEventListener("click", function () {
+          deleteModal.classList.add("hidden");
+        });
+      });
+
+      // GET DATA DELETE
+      deleteButton.forEach((button) => {
+        button.addEventListener("click", function (event) {
+          event.preventDefault();
+
+          id = event.target.parentNode.getAttribute("href").split("/").pop();
+
+          console.log(id);
+        });
+      });
+
+      // DELETEEEEEEEEEEEE BENERANNNN
+      deleteData.forEach((button) => {
+        button.addEventListener("click", function () {
+          const deleteLink = event.target.parentNode;
+          deleteLink.href = `siswas/del/admin/${id}`;
+        });
+      });
+
+      // UPDATE
       const updateModal = document.getElementById("updateModal");
       const closeUpdateModal = document.querySelectorAll(".closeUpdateModal");
       const updateButton = document.querySelectorAll(".updateDataButton");
@@ -789,44 +828,38 @@
         });
       });
 
-      // DELETE
-      const deleteModal = document.getElementById("deleteModal");
-      const closeModal = document.querySelectorAll(".closeModal");
-      const deleteButton = document.querySelectorAll(".deleteButton");
-      const deleteData = document.querySelectorAll(".deactivate");
-      let id = 1;
+      // FILTER DATA ???
+      const selectElement = document.getElementById("category");
+      const currentURL = window.location.pathname;
+      const currentCategory = currentURL.substring(
+        currentURL.lastIndexOf("/") + 1
+      );
 
-      deleteButton.forEach((button) => {
-        button.addEventListener("click", function (event) {
-          event.preventDefault();
+      const optionIndex = {
+        all: 0,
+        matematika: 1,
+        ipa: 2,
+        ips: 3,
+        bahasa: 4,
+        bela_diri: 5,
+        tari: 6,
+      };
 
-          deleteModal.classList.remove("hidden");
-        });
-      });
+      
+      const selectedOptionIndex = optionIndex[currentCategory];
+      if (selectedOptionIndex) {
+        selectElement.selectedIndex = selectedOptionIndex;
+      }
+      
+      selectElement.addEventListener("change", function () {
+        const selectedOption = this.value;
 
-      closeModal.forEach((button) => {
-        button.addEventListener("click", function () {
-          deleteModal.classList.add("hidden");
-        });
-      });
-
-      // GET DATA DELETE
-      deleteButton.forEach((button) => {
-        button.addEventListener("click", function (event) {
-          event.preventDefault();
-
-          id = event.target.parentNode.getAttribute("href").split("/").pop();
-
-          console.log(id);
-        });
-      });
-
-      // DELETEEEEEEEEEEEE BENERANNNN
-      deleteData.forEach((button) => {
-        button.addEventListener("click", function () {
-          const deleteLink = event.target.parentNode;
-          deleteLink.href = `siswas/del/admin/${id}`;
-        });
+        if (selectedOption) {
+          const newURL = `/siswas/${selectedOption}`;
+          console.log("URL", newURL);
+          console.log("Seleected Option", selectedOption);
+          window.location.href = newURL;
+        }
       });
     </script>
   </body>
