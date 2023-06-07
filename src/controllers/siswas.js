@@ -336,3 +336,58 @@ exports.updateData = async (req, res) => {
     res.render("errors/500", {});
   }
 };
+
+exports.updateSiswaAdmin = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const body = req.body;
+    const schema = joi.object({
+      fullname: joi.string().min(3).required(),
+      birth_place: joi.string().min(3).required(),
+      birth_date: joi.date().iso().required(),
+      class_category: joi
+        .string()
+        .valid("Matematika", "IPA", "IPS", "Bahasa", "Bela Diri", "Tari")
+        .required(),
+      address: joi.string().min(3).required(),
+      phone: joi.string().min(11).required(),
+      parents_name: joi.string().min(3).required(),
+      parents_contact: joi.string().min(11).required(),
+    });
+
+    const { error } = schema.validate(body);
+
+    if (error) {
+      console.error(error.details[0].message);
+      return res.render("errors/400", { error: error.details[0].message });
+    }
+
+    const update = await siswas.update(body, {
+      where: {
+        id,
+      },
+    });
+
+    res.redirect(`/siswas`);
+  } catch (err) {
+    console.error(err);
+    res.render("errors/500", {});
+  }
+};
+
+exports.getDataUpdate = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const data = await siswas.findOne({
+      where: {
+        id,
+      },
+    });
+
+    res.render("pages/admin", { update: data});
+  } catch (err) {
+    console.error(err);
+    res.render("errors/500", {});
+  }
+}
