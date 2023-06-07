@@ -321,7 +321,7 @@ exports.deleteDataAdmin = async (req, res) => {
       },
     });
 
-    res.redirect("/siswas/all");
+    res.redirect("/siswas/admin/all");
   } catch (err) {
     console.error(err);
     res.render("errors/500", {});
