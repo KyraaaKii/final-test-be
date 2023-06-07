@@ -3,7 +3,7 @@ const router = express.Router();
 const controller = require("../controllers/siswas");
 const { authToken } = require("../middleware/authToken");
 
-router.get("/", authToken, controller.getAll);
+router.get("/:category", authToken, controller.getAll);
 router.get("/ips", authToken, controller.getAllIps);
 router.get("/ipa", authToken, controller.getAllIpa);
 router.get("/matematika", authToken, controller.getAllMtk);

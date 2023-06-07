@@ -5,9 +5,50 @@ const joi = require("joi");
 
 exports.getAll = async (req, res) => {
   try {
-    const data = await siswas.findAll();
+    const category = req.params.category;
+    let data = {}
 
-    res.render("pages/admin", { data: data });
+    if (category == "all") {
+      data = await siswas.findAll();
+    } else if (category == "matematika") {
+      data = await siswas.findAll({
+        where: {
+          class_category: "Matematika",
+        },
+      });
+    } else if (category == "ipa") {
+      data = await siswas.findAll({
+        where: {
+          class_category: "IPA",
+        },
+      });
+    } else if (category == "ips") {
+      data = await siswas.findAll({
+        where: {
+          class_category: "IPS",
+        },
+      });
+    } else if (category == "bahasa") {
+      data = await siswas.findAll({
+        where: {
+          class_category: "Bahasa",
+        },
+      });
+    } else if (category == "bela_diri") {
+      data = await siswas.findAll({
+        where: {
+          class_category: "Bela Diri",
+        },
+      });
+    } else if (category == "tari") {
+      data = await siswas.findAll({
+        where: {
+          class_category: "Tari",
+        },
+      });
+    }
+    
+    res.render("pages/admin", { data: data }); 
   } catch (err) {
     console.error(err);
     res.render("errors/500", {});
@@ -222,7 +263,7 @@ exports.addData = async (req, res) => {
       parents_contact: body.parents_contact,
     });
 
-    res.redirect("/siswas");
+    res.redirect("/siswas/all");
   } catch (err) {
     console.error(err);
     res.render("errors/500", {});
@@ -280,7 +321,7 @@ exports.deleteDataAdmin = async (req, res) => {
       },
     });
 
-    res.redirect("/siswas");
+    res.redirect("/siswas/all");
   } catch (err) {
     console.error(err);
     res.render("errors/500", {});
@@ -368,7 +409,7 @@ exports.updateSiswaAdmin = async (req, res) => {
       },
     });
 
-    res.redirect(`/siswas`);
+    res.redirect(`/siswas/all`);
   } catch (err) {
     console.error(err);
     res.render("errors/500", {});
