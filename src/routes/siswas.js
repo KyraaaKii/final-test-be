@@ -15,5 +15,7 @@ router.post("/add", authToken, controller.addData);
 router.get("/delete/:id", authToken, controller.deleteData);
 router.get("/del/admin/:id", authToken, controller.deleteDataAdmin);
 router.post("/update/:id", authToken, controller.updateData);
+router.get("/get/update/:id", authToken, controller.getDataUpdate);
+router.post("/upd/admin/:id", authToken, controller.updateSiswaAdmin);
 
 module.exports = router;
