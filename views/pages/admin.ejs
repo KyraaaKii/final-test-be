@@ -70,158 +70,20 @@
             class="relative overflow-x-auto shadow-md sm:rounded-lg px-2 py-5"
           >
             <div class="flex items-center justify-between pb-4">
-              <div>
-                <button
-                  id="dropdownRadioButton"
-                  data-dropdown-toggle="dropdownRadio"
-                  class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5"
-                  type="button"
+              <div class="bg-gray-50">
+                <select
+                  name="class_category"
+                  id="class_category"
+                  class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-1.5 px-2"
                 >
-                  All Category
-                  <svg
-                    class="w-3 h-3 ml-2"
-                    aria-hidden="true"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 9l-7 7-7-7"
-                    ></path>
-                  </svg>
-                </button>
-                <!-- Dropdown menu -->
-                <div
-                  id="dropdownRadio"
-                  class="z-50 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg border border-gray-200 shadow-md"
-                  data-popper-reference-hidden=""
-                  data-popper-escaped=""
-                  data-popper-placement="top"
-                  style="
-                    position: absolute;
-                    inset: auto auto 0px 0px;
-                    margin: 0px;
-                    transform: translate3d(522.5px, 3847.5px, 0px);
-                  "
-                >
-                  <ul
-                    class="p-3 space-y-1 text-sm text-gray-700"
-                    aria-labelledby="dropdownRadioButton"
-                  >
-                    <li>
-                      <div
-                        class="flex items-center p-2 rounded hover:bg-gray-100"
-                      >
-                        <input
-                          id="filter-radio-example-1"
-                          type="radio"
-                          value=""
-                          name="filter-radio"
-                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
-                        />
-                        <label
-                          for="filter-radio-example-1"
-                          class="w-full ml-2 text-sm font-medium text-gray-500 rounded"
-                          >Matematika</label
-                        >
-                      </div>
-                    </li>
-                    <li>
-                      <div
-                        class="flex items-center p-2 rounded hover:bg-gray-100"
-                      >
-                        <input
-                          id="filter-radio-example-1"
-                          type="radio"
-                          value=""
-                          name="filter-radio"
-                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
-                        />
-                        <label
-                          for="filter-radio-example-1"
-                          class="w-full ml-2 text-sm font-medium text-gray-500 rounded"
-                          >IPA</label
-                        >
-                      </div>
-                    </li>
-                    <li>
-                      <div
-                        class="flex items-center p-2 rounded hover:bg-gray-100"
-                      >
-                        <input
-                          id="filter-radio-example-1"
-                          type="radio"
-                          value=""
-                          name="filter-radio"
-                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
-                        />
-                        <label
-                          for="filter-radio-example-1"
-                          class="w-full ml-2 text-sm font-medium text-gray-500 rounded"
-                          >IPS</label
-                        >
-                      </div>
-                    </li>
-                    <li>
-                      <div
-                        class="flex items-center p-2 rounded hover:bg-gray-100"
-                      >
-                        <input
-                          id="filter-radio-example-1"
-                          type="radio"
-                          value=""
-                          name="filter-radio"
-                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
-                        />
-                        <label
-                          for="filter-radio-example-1"
-                          class="w-full ml-2 text-sm font-medium text-gray-500 rounded"
-                          >Bahasa</label
-                        >
-                      </div>
-                    </li>
-                    <li>
-                      <div
-                        class="flex items-center p-2 rounded hover:bg-gray-100"
-                      >
-                        <input
-                          id="filter-radio-example-1"
-                          type="radio"
-                          value=""
-                          name="filter-radio"
-                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
-                        />
-                        <label
-                          for="filter-radio-example-1"
-                          class="w-full ml-2 text-sm font-medium text-gray-500 rounded"
-                          >Bela Diri</label
-                        >
-                      </div>
-                    </li>
-                    <li>
-                      <div
-                        class="flex items-center p-2 rounded hover:bg-gray-100"
-                      >
-                        <input
-                          id="filter-radio-example-1"
-                          type="radio"
-                          value=""
-                          name="filter-radio"
-                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
-                        />
-                        <label
-                          for="filter-radio-example-1"
-                          class="w-full ml-2 text-sm font-medium text-gray-500 rounded"
-                          >Tari</label
-                        >
-                      </div>
-                    </li>
-                  </ul>
-                </div>
+                  <option value="" disabled selected>Class Category</option>
+                  <option value="Matematika">Matematika</option>
+                  <option value="IPA">IPA</option>
+                  <option value="IPS">IPS</option>
+                  <option value="Bahasa">Bahasa</option>
+                  <option value="Bela Diri">Bela Diri</option>
+                  <option value="Tari">Tari</option>
+                </select>
               </div>
               <label for="table-search" class="sr-only">Search</label>
               <div class="relative">
@@ -893,19 +755,19 @@
               const parentsName = document.getElementById("updParentsName");
               const parentsContact =
                 document.getElementById("updParentsContact");
-                fullname.value = data.fullname;
-                category.value = data.class_category;
-                birthPlace.value = data.birth_place;
-                birthDate.value = new Date(data.birth_date)
+              fullname.value = data.fullname;
+              category.value = data.class_category;
+              birthPlace.value = data.birth_place;
+              birthDate.value = new Date(data.birth_date)
                 .toISOString()
                 .split("T")[0];
-                address.textContent = data.address;
-                phone.value = data.phone;
-                parentsName.value = data.parents_name;
-                parentsContact.value = data.parents_contact;
+              address.textContent = data.address;
+              phone.value = data.phone;
+              parentsName.value = data.parents_name;
+              parentsContact.value = data.parents_contact;
 
-                const form = document.getElementById("updateForm");
-                form.action = `siswas/upd/admin/${idUpdate}`;
+              const form = document.getElementById("updateForm");
+              form.action = `siswas/upd/admin/${idUpdate}`;
             })
             .catch((error) => {
               console.error(error);
