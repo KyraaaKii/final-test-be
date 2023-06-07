@@ -385,7 +385,10 @@ exports.getDataUpdate = async (req, res) => {
       },
     });
 
-    res.render("pages/admin", { update: data});
+    res.status(200).send({
+      status: 200,
+      data: data
+    })
   } catch (err) {
     console.error(err);
     res.render("errors/500", {});

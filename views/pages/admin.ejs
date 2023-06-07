@@ -666,8 +666,9 @@
                   </h3>
                   <div class="mt-2">
                     <form
+                      id="updateForm"
                       class="space-y-6"
-                      action="/siswas/update/"
+                      action=""
                       method="POST"
                     >
                       <div>
@@ -678,9 +679,10 @@
                         >
                         <div class="mt-2">
                           <input
-                            id="fullname"
+                            id="updFullname"
                             name="fullname"
                             type="text"
+                            value=""
                             required
                             class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                           />
@@ -696,10 +698,18 @@
                         <div class="mt-2">
                           <select
                             name="class_category"
-                            id="class_category"
+                            id="updClassCategory"
                             class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-1.5 px-2"
                           >
-                            <option value="" disabled>Class Category</option>
+                            <option value="" disabled selected>
+                              Class Category
+                            </option>
+                            <option value="Matematika">Matematika</option>
+                            <option value="IPA">IPA</option>
+                            <option value="IPS">IPS</option>
+                            <option value="Bahasa">Bahasa</option>
+                            <option value="Bela Diri">Bela Diri</option>
+                            <option value="Tari">Tari</option>
                           </select>
                         </div>
                       </div>
@@ -713,9 +723,10 @@
                           >
                           <div class="mt-2">
                             <input
-                              id="birth_place"
+                              id="updBirthPlace"
                               name="birth_place"
                               type="text"
+                              value=""
                               required
                               class="block w-[230px] mr-4 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
@@ -729,9 +740,10 @@
                           >
                           <div class="mt-2">
                             <input
-                              id="birth_date"
+                              id="updBirthDate"
                               name="birth_date"
                               type="date"
+                              value=""
                               required
                               class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
@@ -747,7 +759,7 @@
                         >
                         <div class="mt-2">
                           <textarea
-                            id="address"
+                            id="updAddress"
                             name="address"
                             required
                             class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -763,7 +775,7 @@
                         >
                         <div class="mt-2">
                           <input
-                            id="phone"
+                            id="updPhone"
                             name="phone"
                             type="text"
                             required
@@ -780,9 +792,10 @@
                         >
                         <div class="mt-2">
                           <input
-                            id="parents_name"
+                            id="updParentsName"
                             name="parents_name"
                             type="text"
+                            value=""
                             required
                             class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                           />
@@ -797,9 +810,10 @@
                         >
                         <div class="mt-2">
                           <input
-                            id="parents_contact"
+                            id="updParentsContact"
                             name="parents_contact"
                             type="text"
+                            value=""
                             required
                             class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                           />
@@ -856,18 +870,60 @@
 
       updateButton.forEach((button) => {
         button.addEventListener("click", function (event) {
-          idUpdate = event.target.parentNode.getAttribute("href").split("/").pop();
-          const updateLink = event.target.parentNode;
-          updateLink.href = `siswas/get/update/${id}`;
+          event.preventDefault();
+          idUpdate = event.target.parentNode
+            .getAttribute("href")
+            .split("/")
+            .pop();
 
-          console.log(idUpdate);
-          updateModal.classList.remove("hidden");
+          fetch(`/siswas/get/update/${idUpdate}`)
+            .then((response) => response.json())
+            .then((res) => {
+              console.log(res.data);
+              updateModal.classList.remove("hidden");
+
+              // SET FIELD SESUAI RESPONSE
+              const data = res.data;
+              const fullname = document.getElementById("updFullname");
+              const category = document.getElementById("updClassCategory");
+              const birthPlace = document.getElementById("updBirthPlace");
+              const birthDate = document.getElementById("updBirthDate");
+              const address = document.getElementById("updAddress");
+              const phone = document.getElementById("updPhone");
+              const parentsName = document.getElementById("updParentsName");
+              const parentsContact =
+                document.getElementById("updParentsContact");
+                fullname.value = data.fullname;
+                category.value = data.class_category;
+                birthPlace.value = data.birth_place;
+                birthDate.value = new Date(data.birth_date)
+                .toISOString()
+                .split("T")[0];
+                address.textContent = data.address;
+                phone.value = data.phone;
+                parentsName.value = data.parents_name;
+                parentsContact.value = data.parents_contact;
+
+                const form = document.getElementById("updateForm");
+                form.action = `siswas/upd/admin/${idUpdate}`;
+            })
+            .catch((error) => {
+              console.error(error);
+            });
         });
       });
 
       closeUpdateModal.forEach((button) => {
         button.addEventListener("click", function () {
           updateModal.classList.add("hidden");
+        });
+      });
+
+      // UPDATEEEEEEEEEEE
+      updateData.forEach((button) => {
+        button.addEventListener("click", function () {
+          const form = document.getElementById("updateForm");
+          form.action = `/siswas/upd/admin/${idUpdate}`;
         });
       });
 
@@ -905,7 +961,7 @@
 
       // DELETEEEEEEEEEEEE BENERANNNN
       deleteData.forEach((button) => {
-        button.addEventListener("click", function (event) {
+        button.addEventListener("click", function () {
           const deleteLink = event.target.parentNode;
           deleteLink.href = `siswas/del/admin/${id}`;
         });
