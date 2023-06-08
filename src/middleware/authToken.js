@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { users } = require("../../models");
+const { siswas } = require("../../models");
 
 exports.authToken = async (req, res, next) => {
   try {
@@ -25,6 +26,14 @@ exports.authToken = async (req, res, next) => {
       }
     );
 
+    const findClass = await siswas.findOne({
+      where: {
+        id: userVerifyId
+      }
+    })
+
+    const classVerified = findClass.class_category.toLowerCase()
+
     const userVerified = await users.findOne({
       where: {
         id: userVerifyId,
@@ -34,7 +43,13 @@ exports.authToken = async (req, res, next) => {
       },
     });
 
-    req.user = userVerified.dataValues;
+    const result = {
+      ...userVerified.dataValues,
+      class: classVerified
+    }
+
+    console.log(result);
+    req.user = result;
     next();
   } catch (err) {
     console.error(err);

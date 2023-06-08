@@ -371,7 +371,7 @@ exports.updateData = async (req, res) => {
       category = category.replace(/\s/g, "_");
     }
 
-    res.redirect(`/siswas/${category}`);
+    res.redirect(`/siswas/user/${category}`);
   } catch (err) {
     console.error(err);
     res.render("errors/500", {});
