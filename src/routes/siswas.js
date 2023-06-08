@@ -5,7 +5,7 @@ const { authToken } = require("../middleware/authToken");
 const { authRole } = require("../middleware/authRole");
 const { authClass } = require("../middleware/authClass");
 
-router.get("/admin/:category", authToken, authClass, authRole, controller.getAll);
+router.get("/admin/:category", authToken, authRole, controller.getAll);
 router.get("/user/ips", authToken, controller.getAllIps);
 router.get("/user/ipa", authToken, controller.getAllIpa);
 router.get("/user/matematika", authToken, controller.getAllMtk);
