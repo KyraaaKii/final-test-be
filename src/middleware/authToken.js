@@ -26,14 +26,6 @@ exports.authToken = async (req, res, next) => {
       }
     );
 
-    const findClass = await siswas.findOne({
-      where: {
-        id: userVerifyId
-      }
-    })
-
-    const classVerified = findClass.class_category.toLowerCase()
-
     const userVerified = await users.findOne({
       where: {
         id: userVerifyId,
@@ -43,13 +35,7 @@ exports.authToken = async (req, res, next) => {
       },
     });
 
-    const result = {
-      ...userVerified.dataValues,
-      class: classVerified
-    }
-
-    console.log(result);
-    req.user = result;
+    req.user = userVerified.dataValues;
     next();
   } catch (err) {
     console.error(err);
