@@ -121,7 +121,6 @@ exports.login = async (req, res) => {
       {
         id: result.id,
         email: result.email,
-        class: resultClass.class_category,
         role: result.role,
       },
       process.env.ACCESS_TOKEN_SECRET
