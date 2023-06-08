@@ -111,10 +111,17 @@ exports.login = async (req, res) => {
       },
     });
 
+    const resultClass = await siswas.findOne({
+      where: {
+        email: body.email,
+      },
+    });
+
     const token = jwt.sign(
       {
         id: result.id,
         email: result.email,
+        class: resultClass.class_category,
         role: result.role,
       },
       process.env.ACCESS_TOKEN_SECRET
@@ -139,7 +146,7 @@ exports.login = async (req, res) => {
     }
     
     res.cookie("accessToken", token);
-    res.redirect(`/siswas/${category}`);
+    res.redirect(`/siswas/user/${category}`);
   } catch (err) {
     console.error(err);
     res.render("errors/500", {});
